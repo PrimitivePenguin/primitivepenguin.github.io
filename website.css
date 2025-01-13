@@ -1,0 +1,227 @@
+/*Added a transition to the hover of sponsor images as well as made the glowing border clearer
+compared to the last submission*/
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #111
+}
+
+.treeCanvasContainer {
+    align-items: center;
+    display: flex; /* Enables flexbox layout */
+    flex-wrap: wrap; /* Allows items to wrap onto multiple lines */
+    justify-content: space-around; /* Distributes items evenly with space around them */
+    border: 2px solid red;
+}
+.treeCanvas {
+    border: 1px lightgray solid;
+    /*margin: 10px;*/
+    width: 100%;
+    margin: 10px;
+}
+
+/*Nav bar*/
+nav {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    width: 100%;
+    background-color: #333333;
+    z-index: 1000; /* Ensures the navbar stays on top */
+}
+
+nav ul {
+    position: sticky;
+    position: -webkit-sticky;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 1px solid #555555;
+}
+
+nav ul li {
+    border-right: 1px gray solid;
+    display: inline;
+}
+nav ul li:last-child {
+    border-right: none;
+}
+
+nav ul li a {
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  padding: 14px 16px;
+  color: #bbb;
+  text-decoration: none;
+}
+
+nav li a:hover {
+    color: #fff; /* Changes background on hover */
+}
+
+/*Fancy thing for showing a bar when hovering*/
+nav ul li a:before{
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    bottom: 0px;
+    left: 10%;
+    background-color: #fff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.15s ease-in-out 0s;
+    transition: all 0.15s ease-in-out 0s;
+  
+  }
+  
+  nav ul li a:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+  
+  div#top_nav a:hover:before , div#top_nav a.active:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+/*Content*/
+.content {
+    margin: 40px auto;
+    padding: 15px;
+    width: 60%;
+    line-height: 1.6;
+    font-size: 18px;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eee;
+    border: 1px solid white;
+}
+.content a {
+    color: #ccc;
+}
+.content a:hover {
+    color: #fff;
+}
+.content table {
+    width: 100%;
+    background-color: #333333;
+    text-align: left;
+    padding: 20px;
+}
+.content table a img {
+    height: 50px;
+}
+.content table .table .bio img {
+    height: auto !important;
+}
+.content table .photo a img{
+    height: 150px !important;
+}
+h3 {
+    font-size: 22px;
+}
+/*Circle*/
+.circle {
+    width: 250px;
+    height: 250px;
+    border: 10px solid white;
+    border-radius: 50%;
+    margin: 5px;
+    transition: all 0.3s ease; /* Smooth transition */
+    object-fit: cover;
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+
+} 
+.circle b {
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+.circle img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.circle:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 15px 5px rgba(169, 167, 167,1); /*Glowing shadow*/
+}
+
+/*Prediction*/
+.prediction {
+    width: 100%;
+    background-color: #333333;
+    color: #eee;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+
+.img-row {/*Seperate container for the images*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the circles horizontally */
+    align-items: center; /* Centers the circles horizontally */
+}
+
+b {
+    font-size: 18px;
+}
+
+/*Class of grid-like rows to list hyperlinks + other content without looking jarring*/
+.grid_row {
+    text-align: left;
+}
+.grid_row table {
+    width: 100%;
+    background-color: #111 !important;
+    font-size: 18px;
+    color: #ddd;
+    padding: 0px !important;
+}
+.grid_row table tr td {
+    border-bottom: 1px solid #555555;
+    padding: 10px 0px;
+}
+.grid_row table tr {
+    border-bottom: none;
+}
+.grid_row table b {
+    color: #fff;
+    font-size: 12px;
+}
+
+
+/*Footer*/
+.footer {
+    bottom: 0;
+    left:0;
+    width: 100%;
+    background-color: #555555;
+    color: #aaaaaa;
+    
+}
+.footer table {
+    width: 100%;
+    text-align: center;
+}
+.footer table a{
+    color: #dddddd;
+    text-decoration: none;
+}
+.footer table a:hover{
+    text-decoration: underline;
+}
