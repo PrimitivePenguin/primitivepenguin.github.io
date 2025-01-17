@@ -1,4 +1,4 @@
-class TreeNode {
+  class TreeNode {
   constructor(key, value, parent = null, treeName = '') {
     this.key = key; // Unique identifier for the node
     this.value = value; // Display value for the node
@@ -53,13 +53,14 @@ class Tree {
   }
 
   // Render the tree on the canvas
-  render(ctx, node = this.root, x = 400, y = 50, offset = 150) {
+  render(ctx, node = this.root, x = 400, y = 50, offset = 100) {
     const nodeWidth = 50; // Width of each node (e.g., [A])
     const nodeHeight = 30; // Height of each node
-    const verticalSpacing = 100; // Spacing between parent and child nodes
+    const verticalSpacing = 150; // Spacing between parent and child nodes
     const horizontalSpacing = 100; // Spacing between sibling nodes
 
     // Draw the node
+    
     ctx.fillStyle = "white";
     ctx.fillRect(x - nodeWidth / 2, y - nodeHeight / 2, nodeWidth, nodeHeight);
     ctx.strokeStyle = "white";
@@ -69,24 +70,40 @@ class Tree {
     ctx.textBaseline = "middle";
     ctx.fillText(node.value, x, y); // Use node.value for display
 
+    ctx.beginPath();
+    ctx.arc(x-nodeWidth/2, y - nodeHeight/2, 5, 0, 2 * Math.PI);
+    ctx.fillStyle = 'black';
+    ctx.fill();
+    ctx.label = 'center';
+    ctx.fillText(`${x},${y}`, x + 10, y - 10);
+    ctx.closePath();
+    console.log(`Amount of child nodes: ${node.children.length}`);  
     // Connect with children (if any)
     if (node.children.length > 0) {
       const childrenWidth = node.children.length * horizontalSpacing; // Total width for children
+      // 3 child - 3
 
       // Render each child node
-      node.children.forEach((child, index) => {
-        const childX = x - childrenWidth / 2 + index * horizontalSpacing;
+      node.children.forEach((child, index) => {// take 400, 50 as x, y
+        let childX = x - childrenWidth / 2 + index * childrenWidth/2;
+        if (node.children.length % 2 === 0) {
+          childX += horizontalSpacing / 2;
+        } else if (node.children.length === 1) {
+          childX = x;
+        }
+        // childX = 400 - 100/2 + 0*100 = 350
         const childY = y + verticalSpacing;
-
+        
         // Draw the connecting line from parent to child
-        ctx.beginPath();
+        
+        ctx.beginPath(); 
         ctx.moveTo(x, y + nodeHeight / 2); // From parent node
         ctx.lineTo(childX, childY - nodeHeight / 2); // To child node
         ctx.stroke();
         ctx.closePath();
-
+        
         // Recursively render the child node
-        this.render(ctx, child, childX, childY, offset / 2);
+        this.render(ctx, child, childX, childY, offset);
       });
     }
   }

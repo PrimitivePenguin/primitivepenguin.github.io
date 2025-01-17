@@ -225,3 +225,16 @@ b {
 .footer table a:hover{
     text-decoration: underline;
 }
+
+/* Devlog */
+.entry {
+    border-top: 1px solid #555555;
+    border-bottom: 1px solid #555555;
+    padding: 20px;
+}
+.entry:first-child {
+    border-top: none;
+}
+.entry:last-child {
+    border-bottom: none;
+}
