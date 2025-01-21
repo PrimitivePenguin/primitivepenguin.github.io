@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Design Sprint 1 Day 1</title>
+    <link rel="stylesheet" type="text/css" href="website.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="future.html">Forecasting</a></li>
+            <li><a href="devlog.html">Devlog</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <h2>Design Sprint 1 - Wireframing and some style changes</h2>
+        <h3>Wireframing</h3>
+        <canvas id="wireframe1" width="400" height="200"></canvas>
+        
+
+        <h3>Some typography changes</h3>
+    </div>
+    <div class="footer">
+        <table>
+            <tr>
+                <td>
+                    Ringo Kojima
+                </td>
+                <td>
+                    email: ringokojima2005@gmail.com
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">© 2025 Ringo Kojima</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var canvas = document.getElementById("wireframe1");
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgb(100 ,100 ,100)';
+        ctx.fillRect(0, 0, canvas.width, 20);
+        ctx.strokeStyle = 'black';
+
+        ctx.rect(50,50,200, 100);
+        ctx.textstyle
+        ctx.fillText("Hello", 150 - 10, 100);
+        ctx.stroke();
+
+        ctx.rect(0,20, canvas.width, canvas.height - 20);
+        ctx.fillStyle = 'rgb(200, 200, 200)';
+    </script>
+</body>
+</html>
+
+<!--Inspiration - apple, format of gov.uk, linkedin profiles, those drink circles for vending machines-->

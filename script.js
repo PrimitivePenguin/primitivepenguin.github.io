@@ -108,6 +108,22 @@ class Tree {
     }
   }
 }
+
+// various canvas shapes
+function squaredash(x, y, width, height, id, text = null) {
+  const canvas = document.getElementById(id);
+  const ctx = canvas.getContext("2d");
+  ctx.beginPath();
+  ctx.setLineDash([5, 15]);
+  ctx.rect(x, y, width, height);
+  ctx.stroke();
+  ctx.closePath();
+  if (text) {
+    ctx.fillText(text, x + width / 2, y + height / 2);
+  }
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
   // Example usage
   const compTree = new Tree("root", "Publish website", "Main Tree"); // key value name
