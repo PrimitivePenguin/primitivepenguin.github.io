@@ -1,25 +1,30 @@
+/*Global variables for typography*/
+
 /*Added a transition to the hover of sponsor images as well as made the glowing border clearer
 compared to the last submission*/
 
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:  Helvetica, sans-serif;
     background-color: #111
 }
-
-.treeCanvasContainer {
+figure {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    display: flex; /* Enables flexbox layout */
-    flex-wrap: wrap; /* Allows items to wrap onto multiple lines */
-    justify-content: space-around; /* Distributes items evenly with space around them */
-    border: 2px solid red;
+    margin: 10px auto;
 }
-.treeCanvas {
-    border: 1px lightgray solid;
-    /*margin: 10px;*/
-    width: 100%;
-    margin: 10px;
+
+figure img {
+    display: block;
+    margin: 0 auto;
+}
+
+figure figcaption {
+    text-align: center;
+    margin-top: 10px;
 }
 
 /*Nav bar*/
@@ -102,7 +107,7 @@ nav ul li a:before{
     background-color: #333;
     font-family: Arial, Helvetica, sans-serif;
     color: #eee;
-    border: 1px solid white;
+    border: 1px soli    d white;
 }
 .content a {
     color: #ccc;
@@ -226,6 +231,44 @@ b {
     text-decoration: underline;
 }
 
+/* Tree Canvas */
+.treeCanvasContainer {
+    align-items: center;
+    display: flex; /* Enables flexbox layout */
+    flex-wrap: wrap; /* Allows items to wrap onto multiple lines */
+    justify-content: space-around; /* Distributes items evenly with space around them */
+    border: 2px solid red;
+}
+.treeCanvas {
+    border: 1px lightgray solid;
+    /*margin: 10px;*/
+    width: 100%;
+    margin: 10px;
+}
+
+.rsquare {
+    width: 100%;
+    background-color: hsl(0,0%,90%);
+    color: hsl(0,0%,10%);
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    border-radius: 10px;
+    width: 400px;
+    height: 350px;
+    border: #ddd solid 2px;
+    margin: 10px;
+    & a {
+        color: hsl(0,0%,10%);
+        &:hover {
+            color: hsl(200, 100%, 50%);
+        }
+    }
+}
+.flex-display {
+    display: flex;
+    justify-content: center;
+}
 /* Devlog */
 .entry {
     border-top: 1px solid #555555;
@@ -237,4 +280,66 @@ b {
 }
 .entry:last-child {
     border-bottom: none;
+}
+/* Mode change Button*/
+.dm_ip_check {
+    width: 200px;
+    position: relative;
+    display: inline-block;
+    padding: 15px 100px;
+}
+.dm_ip_check input {
+	display: none;
+    align-items: center;
+}
+.dm_ip_check label {
+	position: relative;
+	display: block;
+	padding: 15px 0;
+	padding-right: 35px;
+	cursor: pointer;
+    font-size: 1rem;
+}
+.dm_ip_check input[type='checkbox'] {
+	position: absolute;
+	visibility: hidden !important;
+}
+.dm_ip_check input[type='checkbox'] + label:before,
+.dm_ip_check input[type='checkbox'] + label:after {
+	position: absolute;
+	top: 50%;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	margin-top: -7.5px;
+	content: '';
+}
+.dm_ip_check input[type='checkbox'] + label:before {
+	
+    right: 0;
+	width: 60px;
+	height: 30px;
+	border: 1px solid #e4e3e1;
+	border-radius: 30px;
+	background: #ffffff;
+}
+.dm_ip_check input[type='checkbox']:checked + label:before {
+    background-color: #bbb;
+}
+/* Circle within the mode*/
+.dm_ip_check input[type='checkbox'] + label:after {
+	right: 29px;
+	width: 30px;
+	height: 30px;
+	-webkit-transition: all 200ms ease-out;
+	        transition: all 200ms ease-out;
+	border-radius: 50%;
+	background: #bdbdbd;
+}
+.dm_ip_check input[type='checkbox']:checked + label:after {
+	right: 0;
+	background: #545454;
+    background-size: contain;
+  background-repeat: no-repeat;
+  font-family:"Font Awesome 5 Free";
+  padding: 6px 0 0 8px;
 }

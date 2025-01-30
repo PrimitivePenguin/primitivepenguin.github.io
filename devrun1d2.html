@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Design Sprint 1 Day 1</title>
+    <title>Design Sprint 1 Day 2</title>
     <link rel="stylesheet" type="text/css" href="website.css">
     <script src="script.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Archivo' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet'>
 </head>
 <body>
     <nav>
@@ -18,10 +23,125 @@
     <div class="content">
         <h2>Design Sprint 1 - Wireframing and some style changes</h2>
         <h3>Wireframing</h3>
-        <canvas id="wireframe1" width="400" height="200"></canvas>
+        <p>
+            Created a wireframe of the home page, a general article format, and a forecasting format. 
+            The home page is a generic design from a YouTube video on the 'best' hero section. 
+            I don't have any experience with designing websites, so this is a good start. 
+            The general article section is a simple format with a title, date, article itself, and a table of contents on the left side. 
+            The forecasting page aims to emulate a Google search, where instead of a link, there is a forecast.
+        </p>
+        The wireframes (drawn on Goodnotes):<br>
+        <figure>
+            <figcaption>Home Page</figcaption>
+            <img src="Home_pagev1.jpg" alt="home wf" style="width: 400px;">
+        </figure>
+
+        <figure>
+            <figcaption>General Article Format</figcaption>
+            <img src="Article_formatv1.jpg" alt="article wf" style="width: 400px;"><br>
+        </figure>
+        <figure>
+            <figcaption>Forecasting format</figcaption>
+            <img src="forecastingv1.jpg" alt="forecasting wf" style="width: 400px;">
+        </figure>
+
         
 
-        <h3>Some typography changes</h3>
+        <h3>Testing Different Typography</h3>
+        <p>
+            Currently, I do not have many pictures. 
+            As such, good typography would have an outstanding effect on the website. 
+            After some research, I've chosen a couple of fonts.
+            Two options use sans-serif fonts for the heading, providing clear legibility, while the body uses serif fonts for a more <a href="https://www.adobe.com/creativecloud/design/discover/serif-vs-sans-serif.html" target="_blank">authoritative tone</a>, 
+            which my website lacks.  I will be testing different fonts and font sizes to see which one looks the best. 
+            I find it interesting that one group of friends has told me that sans-serif fonts are easier to look at and that serif fonts such as Lora look 'old'. 
+            However, another group of friends who are mostly in Business, have told me that considering my aim to appeal to recruiters, 
+            the serif fonts for the body and sans-serif for the header is better. 
+            I will ask them again for feedback after most of the new website design is implemented.
+        </p>
+
+        <div class="dm_ip_check">
+            <input type="checkbox" id="testModeChange">
+            <label for="testModeChange">Dark Mode</label>
+          </div>
+        <br>
+
+        <table style="text-align:center;">
+            <tr>
+                <th>Heading - Serif, body - sans-serif</th>
+                <th>Heading and body - Inter</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="rsquare typography_test"
+                    style="font-family: 'Times New Roman';">
+                        <h1 style="font-weight: bold; font-size: 2rem/1em; font-family: 'Inter', sans-serif;">BIG HEADING</h1>
+                        <h2 style="font-weight: bold; font-size: 1.5rem/1em; font-family: 'Inter', sans-serif;">Medium Heading</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit rhoncus mi in venenatis<br>
+                        </p>
+                        <p2>
+                            Some more paragraphs
+                        </p2><br>
+                        <i style>Some smol text</i><br>
+                        <a href="index.html">Highlighted links</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="rsquare typography_test"
+                    style="font-family: 'Open Sans';">
+                        <h1 style="font-weight: bold; font-size: 2rem/1em; font-family: 'Inter', sans-serif;">BIG HEADING</h1>
+                        <h2 style="font-weight: bold; font-size: 1.5rem/1em; font-family: 'Inter', sans-serif;">Medium Heading</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit rhoncus mi in venenatis<br>
+                        </p>
+                        <p2>
+                            Some more paragraphs
+                        </p2><br>
+                        <i>Some smol text</i><br>
+                        <a href="index.html">Highlighted links</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>Heading - Archivo Medium, Body - Open Sans light</th>
+                <th>Heading - Montserrat, Body - Lora</th>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="rsquare typography_test"
+                    style="font-family: 'Open Sans'; font-weight: light;">
+                        <h1 style="font-weight: bold; font-size: 2rem/1em; font-family: 'Archivo', sans-serif; font-weight: medium;">BIG HEADING</h1>
+                        <h2>Medium Heading</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit rhoncus mi in venenatis<br>
+                        </p>
+                        <p2>
+                            Some more paragraphs
+                        </p2><br>
+                        <i>Some smol text</i><br>
+                        <a href="index.html">Highlighted links</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="rsquare typography_test"
+                    style="font-family: 'Lora';">
+                        <h1 style="font-weight: bold; font-size: 2rem/1em; font-family: 'Montserrat';">BIG HEADING</h1>
+                        <h2 style="font-family: 'Montserrat';">Medium Heading</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit rhoncus mi in venenatis<br>
+                        </p>
+                        <p2>
+                            Some more paragraphs
+                        </p2><br>
+                        <i>Some smol text</i><br>
+                        <a href="index.html">Highlighted links</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
     </div>
     <div class="footer">
         <table>
@@ -39,21 +159,51 @@
         </table>
     </div>
     <script>
-        var canvas = document.getElementById("wireframe1");
-        var ctx = canvas.getContext("2d");
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgb(100 ,100 ,100)';
-        ctx.fillRect(0, 0, canvas.width, 20);
-        ctx.strokeStyle = 'black';
-
-        ctx.rect(50,50,200, 100);
-        ctx.textstyle
-        ctx.fillText("Hello", 150 - 10, 100);
-        ctx.stroke();
-
-        ctx.rect(0,20, canvas.width, canvas.height - 20);
-        ctx.fillStyle = 'rgb(200, 200, 200)';
+        console.log("Script loaded");
+        // Dark mode
+        const testbtn = document.querySelector('#testModeChange');
+        console.log(testbtn);
+        function changeTestMode() {
+            let elements = document.querySelectorAll('.rsquare.typography_test');
+            console.log(`button pressed, ${elements}`);
+            if (testbtn.checked) {
+                // Dark mode
+                elements.forEach(element => {
+                    element.style.backgroundColor = 'hsl(0, 0%, 10%)';
+                    element.style.color = 'hsl(0, 0%, 90%)';
+                    element.style.border = '3px solid hsl(0, 0%, 100%)';
+                    element.querySelectorAll('a').forEach(link => {
+                        link.style.color = 'hsl(0, 0%, 90%)';
+                        link.addEventListener('mouseover', () => {
+                            link.style.color = 'hsl(200, 100%, 50%)';
+                        });
+                        link.addEventListener('mouseout', () => {
+                            link.style.color = 'hsl(0, 0%, 90%)';
+                        });
+                    });
+                });
+                console.log("Dark mode");
+            } else {
+                // Light mode
+                elements.forEach(element => {
+                    element.style.backgroundColor = 'hsl(0, 0%, 100%)';
+                    element.style.color = 'hsl(0, 0%, 10%)';
+                    element.style.border = '3px solid hsl(0, 0%, 0%)';
+                    element.querySelectorAll('a').forEach(link => {
+                        link.style.color = 'hsl(0, 0%, 10%)';
+                        link.addEventListener('mouseover', () => {
+                            link.style.color = 'hsl(200, 100%, 50%)';
+                        });
+                        link.addEventListener('mouseout', () => {
+                            link.style.color = 'hsl(0, 0%, 10%)';
+                        });
+                    });
+                });
+                console.log("Light mode");
+            }
+        }
+        testbtn.addEventListener('change', changeTestMode);
+    
     </script>
 </body>
 </html>

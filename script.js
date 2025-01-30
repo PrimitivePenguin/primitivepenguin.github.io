@@ -124,34 +124,11 @@ function squaredash(x, y, width, height, id, text = null) {
 }
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
   // Example usage
-  const compTree = new Tree("root", "Publish website", "Main Tree"); // key value name
-  compTree.insertNode("root", "a", "website"); // parent, key, value
-  compTree.insertNode("a", "a1", "v2");
-  compTree.insertNode("a1", "a11", "v3");
-  compTree.insertNode("a1", "a12", "react js");  
+  const loadTime = performance.now()
 
-  compTree.insertNode("root", "b", "DNN");
-  compTree.insertNode("b", "b1", "CNN");
-  compTree.insertNode("b", "b2", "comp vision");
-  
-  compTree.insertNode("root", "c", "Quantum Computing");
-  compTree.insertNode("c", "c1", "learn");
-  compTree.insertNode("c1", "c11", "quantum physics");
-  compTree.insertNode("c1", "c12", "linear algebra");
-  compTree.insertNode("c", "c2", "quantum coding");
-  compTree.insertNode("c2", "c21", "concepts");
-  compTree.insertNode("c2", "c22", "qiskit");
-  
-  const mainTree = new Tree("root", "Main Tree", "Main Tree");
-  mainTree.insertNode("root", "a", "forecasting");
-  mainTree.insertNode("a", "a1", "time series");
-
-  mainTree.insertNode("root", "b", "biochem");
-
-  mainTree.insertNode("root", "c", "physics");
-  mainTree.insertNode("c", "c1", "naval shell sim");
 
   // Function to render a tree on a canvas
   function canvasRender(tree, canvasID) {
@@ -162,6 +139,36 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Render the trees on different canvases
-  canvasRender(compTree, "treeCanvas1");
-  canvasRender(mainTree, "treeCanvas2");
+  if (document.getElementById("treeCanvas1") && document.getElementById("treeCanvas")) {
+    const compTree = new Tree("root", "Publish website", "Main Tree"); // key value name
+    compTree.insertNode("root", "a", "website"); // parent, key, value
+    compTree.insertNode("a", "a1", "v2");
+    compTree.insertNode("a1", "a11", "v3");
+    compTree.insertNode("a1", "a12", "react js");  
+
+    compTree.insertNode("root", "b", "DNN");
+    compTree.insertNode("b", "b1", "CNN");
+    compTree.insertNode("b", "b2", "comp vision");
+    
+    compTree.insertNode("root", "c", "Quantum Computing");
+    compTree.insertNode("c", "c1", "learn");
+    compTree.insertNode("c1", "c11", "quantum physics");
+    compTree.insertNode("c1", "c12", "linear algebra");
+    compTree.insertNode("c", "c2", "quantum coding");
+    compTree.insertNode("c2", "c21", "concepts");
+    compTree.insertNode("c2", "c22", "qiskit");
+    
+    const mainTree = new Tree("root", "Main Tree", "Main Tree");
+    mainTree.insertNode("root", "a", "forecasting");
+    mainTree.insertNode("a", "a1", "time series");
+
+    mainTree.insertNode("root", "b", "biochem");
+
+    mainTree.insertNode("root", "c", "physics");
+    mainTree.insertNode("c", "c1", "naval shell sim");
+    canvasRender(compTree, "treeCanvas1");
+    canvasRender(mainTree, "treeCanvas2");
+  }
+  const endTime = performance.now();
+  console.log(`${endTime - loadTime}ms`);
 });
