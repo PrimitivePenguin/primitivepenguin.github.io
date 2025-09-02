@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Contour Map Test</title>
+    <link rel="stylesheet" type="text/css" href="website.css">
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="contour.js"></script>
+    <style>
+        #wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
+        svg { width: 100%; height: 520px; display: block; border-radius: 16px; }
+        .tri { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="future.html">Forecasting</a></li>
+            <li><a href="devlog.html">Devlog</a></li>
+        </ul>
+    </nav>
+    <div class="heroPage" id="meshContainer1">
+        <div class="overlay">
+            <h1>A Penguin's Website</h1>
+        </div>
+        <svg id="heroMesh" alt="A contour map created using marching square algorithm and perlin noise generation"></svg>
+    </div>
+    <div class="content">
+        <h1>Home Page Design 1</h1>
+        <h2>SLIDER STILL UNDER CONSTRUCTION, IT WON'T WORK (BUTTONS DO WORK)</h2>
+        Scale: <input type="range" min="0.1" max="1" value="0.25" class="slider" id="scale1">
+        <span id="scale1Value">0.1</span>
+        (How zoomed out you are, more zoomed out the more stuff you see)<br>
+        Dampening: <input type="range" min="0.01" max="1" value="0.25" class="slider" id="dampening1"> (How "smooth" the animation is)<br>
+        Increment: <input type="range" min="0.01" max="1" value="0.1" class="slider" id="increment1"> (Responsible for controlling the speed of the animation)<br>
+        <button onclick="stopAnimation(); stopped = true;">Stop</button> 
+        <button onclick="resumeAnimation(); stopped = false;">Resume</button><BR>
+        Test scale1
+
+        
+        <input type="range" min="0.01" max="1" value="0.25" class="slider" id="test">
+        <span id="testValue">0.25</span>
+
+    </div>
+    <div class="footer">
+        <table>
+            <tr>
+                <td>
+                    Ringo Kojima
+                </td>
+                <td>
+                    email: ringokojima2005@gmail.com</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">© 2025 Ringo Kojima</td>
+            </tr>
+        </table>
+            <script>
+            var slider = document.getElementById("test");
+            var output = document.getElementById("testValue");
+            output.innerHTML = slider.value; // Display the default slider value
+
+            // Update the current slider value (each time you drag the slider handle)
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            } 
+
+
+            let res = 15;
+            let colors = 10;
+            const field = setup(res, "meshContainer1");
+            colorlist = [[255,255,255], [255,255,0],[255,0,255],[0,255,255],[0,0,0]]; // white, yellow, magenta, cyan, black
+
+            const scale1Slider = document.getElementById("scale1");
+            const scale1ValueDisplay = document.getElementById("scale1Value");
+
+            let scale1 = parseFloat(document.getElementById("scale1").value);
+            scale1ValueDisplay.textContent = scale1;
+            
+            scale1Slider.oninput = function() {
+                scale1 = parseFloat(this.value); // Update numeric value
+                scale1ValueDisplay.textContent = scale1.toFixed(2); // Show new value
+                stopAnimation();
+                startAnimation(field, colors, colorlist, increment1, dampening1, scale1);
+            }
+
+            let dampening1 = parseFloat(document.getElementById("dampening1").value);
+            let increment1 = parseFloat(document.getElementById("increment1").value);
+            console.log("Initial: ", scale1, dampening1, increment1);
+            // Event listeners
+            console.log(typeof(scale1), scale1);
+            console.log(typeof(dampening1), dampening1);
+            console.log(typeof(increment1), increment1);
+            
+
+            dampening1.oninput = function() {
+                console.log("changing dampening");
+                dampening1 = parseFloat(this.value);
+                stopAnimation();
+                startAnimation(field, colors, colorlist, increment1, dampening1, scale1);
+            }
+
+            increment1.oninput = function() {
+                console.log("changing increment");
+                increment1 = parseFloat(this.value);
+                stopAnimation();
+                startAnimation(field, colors, colorlist, increment1, dampening1, scale1);
+            }
+
+            startAnimation(field, colors, colorlist, 0.1, 0.25, 0.25);
+
+            const heroMesh = document.getElementById("heroMesh");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // heroMesh is visible → resume animation
+                        resumeAnimation();
+                        console.log("heroMesh visible → animation resumed");
+                    } else {
+                        // heroMesh is not visible → pause animation
+                        stopAnimation();
+                        console.log("heroMesh hidden → animation paused");
+                    }
+                });
+            }, { threshold: 0.1 }); // trigger when at least 10% visible
+
+            observer.observe(heroMesh);
+            
+        </script>
+    </div>
+</body>
+</html>
+
+<!--Inspiration - apple, format of gov.uk, linkedin profiles, those drink circles for vending machines-->
