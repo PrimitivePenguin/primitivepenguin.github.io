@@ -242,7 +242,20 @@ function draw(field, num_color, colorStops = [[0, 0, 0], [255, 255, 255]]) {
         }
     }
     for (let k = 0; k < levels.length; k++) {
-        drawPath(svg, svg_level[k], colors[k]);
+        if (svg_level[k] != "")  {
+        let shapes = sortSVG(svg_level[k]);
+        for (let s = 0; s < shapes.length; s++) {
+            let shape = "M" + shapes[s].points.map(p => p).join(" L");
+            if (shapes[s].type == "closed") {
+                shape += " Z";
+                drawPath(svg, shape, colors[k]);
+            } else {
+                // open is problem
+                drawPath(svg, shape, colors[k]);
+            }
+        }
+        console.log("Level:", k, "Shapes:", shapes);
+        }
     }
 }
 
@@ -296,12 +309,83 @@ function addMS(state, i, j, res) { // returns the corresponding string to marchi
 
 function getState(a, b, c, d, threshold) {
     // Find the corresponding level of the max and min
-
     a = a >= threshold ? 1 : 0;
     b = b >= threshold ? 1 : 0;
     c = c >= threshold ? 1 : 0;
     d = d >= threshold ? 1 : 0;
     return a * 8 + b * 4 + c * 2 + d * 1;
+}
+
+// sort an unsorted string of svg lines into shapes
+function sortSVG(svgString) {
+    if (!svgString) return [];
+
+    // Step 1: Parse string into edge pairs
+    const path = svgString.replace(/[ML]/g, "").trim().split(/\s+/);
+    const newpath = [];
+    for (let i = 0; i < path.length; i += 2) {
+        if (path[i + 1]) {
+            newpath.push([path[i], path[i + 1]]);
+        }
+    }
+
+    // Step 2: Build adjacency map
+    const adjacency = {};
+    const edges = new Set(); // mark edges as "unused"
+    for (let [a, b] of newpath) {
+        if (!adjacency[a]) adjacency[a] = [];
+        if (!adjacency[b]) adjacency[b] = [];
+        adjacency[a].push(b);
+        adjacency[b].push(a);
+        edges.add(a + "-" + b);
+        edges.add(b + "-" + a); // undirected
+    }
+
+    // Step 3: Traverse shapes
+    const visitedEdges = new Set();
+    const shapes = [];
+
+    function traverse(start) {
+        const shape = [start];
+        let current = start;
+
+        while (true) {
+            let next = adjacency[current]?.find(
+                (n) => !visitedEdges.has(current + "-" + n)
+            );
+            if (!next) break; // dead end → open path
+
+            // mark edge as visited
+            visitedEdges.add(current + "-" + next);
+            visitedEdges.add(next + "-" + current);
+
+
+
+            if (next === start) {
+                // closed loop, stop and keep the start repeated
+                return { type: "closed", points: shape };
+            }
+            shape.push(next);
+            current = next;
+        }
+
+        // open path → don't connect back to start
+        return { type: "open", points: shape };
+    }
+
+    // Step 4: Walk through all nodes
+    for (let [a, b] of newpath) {
+        if (!visitedEdges.has(a + "-" + b)) {
+            shapes.push(traverse(a));
+        }
+    }
+    return shapes;
+}
+
+function swap(arr, i, j) {
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
 }
 
 // Animation
@@ -346,7 +430,6 @@ function animate(field, num_color, colorlist, increment, dampening, scale) {
     // Redraw marching squares with updated values
     draw(modulatedField, num_color, colorlist);
     // Increment time
-    console.log("time: ", t, "increment: ", increment);
     t  += increment;
     t = Math.round(t * 10) /10;
 
