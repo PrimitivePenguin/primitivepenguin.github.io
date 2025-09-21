@@ -5,6 +5,8 @@
     <title>Devlog</title>
     <link rel="stylesheet" type="text/css" href="website.css">
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="contour.js"></script>
     <style>
         #wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
         svg { width: 100%; height: 520px; display: block; border-radius: 16px; }
@@ -20,15 +22,58 @@
             <li><a href="devlog.html">Devlog</a></li>
         </ul>
     </nav>
+    <div class="heroPage" id="meshContainer1">
+        <div class="overlay">
+            <h1>A Penguin's Website</h1>
+        </div>
+        <svg id="heroMesh" alt="A contour map created using marching square algorithm and perlin noise generation"></svg>
+    </div>
     <div class="content">
-        <h1>Testing Home Page</h1>
-        <svg id="heroMesh" style="border: 1px solid red;"></svg>
+        <a target="_blank" href="contour_hp.html">Various test designs for the home page background art - 2025/09/01</a> <br>
+        <a target="_blank" href="devrun1d1.html">Design Sprint Day 1 - 2025/01/17</a> <br>
+        <a target="_blank" href="devrun1d2.html">Design Sprint Day 2 - 2025/01/18</a> <br>
+        <a target="_blank" href="devrun1d3.html">Design Sprint Day 3 - 2025/02/12</a> <br>
+        <a target="_blank" href="macrograph.html">Macroeconomic</a> <br>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <div class="bio"><img src="profile.jpg" alt="Ringo Kojima (profile)"></div>
+                </td>
+                <td>
+                    <b>Ringo Kojima</b><br>
+                    <i>SFU Student</i>
+                    <p>
 
-        <script src="mesh.js"></script>
-        <script>
-            const svg = document.getElementById("heroMesh");
-            initRandomPoints(svg, 20); // 25 points, speed 1.2 px/frame
-        </script>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    See my profile on:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a target="_blank" href = "https://www.linkedin.com/in/ringo-kojima-aa3631324"><img src="LinkedIn_icon.svg" alt="LinkedIn"></a>
+                </td>
+                <td>
+                    <a target="_blank" href = "https://github.com/PrimitivePenguin"><img src="github.svg" alt="github"></a>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <a target="_blank" href = "https://www.sfu.ca/fas/computing.html"><img src="SFU-block-logo.svg" alt="SFU"></a>                </td>
+                <td>
+                    <b>School of Computing Science</b><br>
+                    <i>Faculty of Applied Science</i><br>
+                    Burnaby BC, Canada
+                </td>
+            </tr>
+        </table>
+
     </div>
     <div class="footer">
         <table>
@@ -44,6 +89,35 @@
                 <td colspan="2">© 2025 Ringo Kojima</td>
             </tr>
         </table>
+            <script>
+
+            let res = 10;
+            let colors = 10;
+            const field = setup(res, "meshContainer1");
+            colorlist = [[255,255,255],[255,0,0], [255,166,0],[255,255,0],[0,255,0],[0,0,255],[75,0,130],[0,0,0]]; // white, yellow, magenta, cyan, black, 
+            //colorlist = [[255,255,255], [255,255,0],[255,173,0], [255,0,255],[68,214,44], [0,255,255],[77, 77, 255],[0,0,0]]; // white, orange, yellow, magenta, green, cyan, blue, black, 
+
+
+            startAnimation(field, colors, colorlist, 0.1, 0.25, 0.25);
+
+            const heroMesh = document.getElementById("heroMesh");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // heroMesh is visible → resume animation
+                        resumeAnimation();
+                        console.log("heroMesh visible → animation resumed");
+                    } else {
+                        // heroMesh is not visible → pause animation
+                        stopAnimation();
+                        console.log("heroMesh hidden → animation paused");
+                    }
+                });
+            }, { threshold: 0.1 }); // trigger when at least 10% visible
+
+            observer.observe(heroMesh);
+            
+        </script>
     </div>
 </body>
 </html>

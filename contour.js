@@ -109,8 +109,8 @@ function generatePerlin(field, scale, dfactor, t) {
             field[i][j] = 255 * value;
         }
     }
-    console.log("t = ", t);
-    console.log(field);
+    //console.log("t = ", t);
+    //console.log(field);
     return field;
 }
 
@@ -254,7 +254,7 @@ function draw(field, num_color, colorStops = [[0, 0, 0], [255, 255, 255]]) {
                 drawPath(svg, shape, colors[k]);
             }
         }
-        console.log("Level:", k, "Shapes:", shapes);
+        //console.log("Level:", k, "Shapes:", shapes);
         }
     }
 }

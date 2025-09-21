@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Devlog</title>
     <link rel="stylesheet" type="text/css" href="website.css">
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="contour.js"></script>
+    <style>
+        #wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
+        svg { width: 100%; height: 520px; display: block; border-radius: 16px; }
+        .tri { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+    </style>
 </head>
 <body>
     <nav>
@@ -15,11 +22,21 @@
             <li><a href="devlog.html">Devlog</a></li>
         </ul>
     </nav>
+    <div class="heroPage" id="meshContainer1">
+        <div class="overlay">
+            <h1>A Penguin's Website</h1>
+        </div>
+        <svg id="heroMesh" alt="A contour map created using marching square algorithm and perlin noise generation"></svg>
+    </div>
     <div class="content">
+        <button onclick="stopAnimation()" style="display: inline-block; margin: 4px 2px; padding: 12px 24px; font-size: 16px; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 4px;">Stop</button>
+        <button onclick="resumeAnimation()" style="display: inline-block; margin: 4px 2px; padding: 12px 24px; font-size: 16px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 4px;">Start</button><br>
+        
+        <h2>Blog Posts </h2>
         <a target="_blank" href="contour_hp.html">Various test designs for the home page background art - 2025/09/01</a> <br>
-        <a target="_blank" href="devrun1d1.html">Design Sprint Day 1 - 2025/01/17</a> <br>
-        <a target="_blank" href="devrun1d2.html">Design Sprint Day 2 - 2025/01/18</a> <br>
         <a target="_blank" href="devrun1d3.html">Design Sprint Day 3 - 2025/02/12</a> <br>
+        <a target="_blank" href="devrun1d2.html">Design Sprint Day 2 - 2025/01/18</a> <br>
+        <a target="_blank" href="devrun1d1.html">Design Sprint Day 1 - 2025/01/17</a> <br>
         <a target="_blank" href="macrograph.html">Macroeconomic</a> <br>
         <table>
             <tr>
@@ -41,10 +58,8 @@
             </tr>
             <tr>
                 <td>
-                    <a target="_blank" href = "https://www.linkedin.com/in/ringo-kojima-aa3631324"><img src="LinkedIn_icon.svg" alt="LinkedIn"></a>
-                </td>
-                <td>
                     <a target="_blank" href = "https://github.com/PrimitivePenguin"><img src="github.svg" alt="github"></a>
+                    <a target="_blank" href = "https://www.linkedin.com/in/ringo-kojima-aa3631324"><img src="LinkedIn_icon.svg" alt="LinkedIn"></a>
                 </td>
             </tr>
         </table>
@@ -60,14 +75,7 @@
                 </td>
             </tr>
         </table>
-        
-        <div class="treeCanvasContainer">
-            <b>Still under construction!</b><br>
-            <b>General roadmap related to CS</b>
-            <canvas class="treeCanvas" id="treeCanvas1" width="800" height="600"></canvas>
-            <b>General roadmap related to my personal interests</b>
-            <canvas class="treeCanvas" id="treeCanvas2" width="800" height="600"></canvas>
-        </div>
+
     </div>
     <div class="footer">
         <table>
@@ -76,13 +84,42 @@
                     Ringo Kojima
                 </td>
                 <td>
-                    email: ringokojima2005@gmail.com
+                    email: ringokojima2005@gmail.com</a>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">© 2025 Ringo Kojima</td>
             </tr>
         </table>
+            <script>
+
+            let res = 10;
+            let colors = 10;
+            const field = setup(res, "meshContainer1");
+            colorlist = [[255,255,255],[255,0,0], [255,166,0],[255,255,0],[0,255,0],[0,0,255],[75,0,130],[0,0,0]]; // white, yellow, magenta, cyan, black, 
+            //colorlist = [[255,255,255], [255,255,0],[255,173,0], [255,0,255],[68,214,44], [0,255,255],[77, 77, 255],[0,0,0]]; // white, orange, yellow, magenta, green, cyan, blue, black, 
+
+
+            startAnimation(field, colors, colorlist, 0.1, 0.25, 0.25);
+
+            const heroMesh = document.getElementById("heroMesh");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // heroMesh is visible → resume animation
+                        resumeAnimation();
+                        console.log("heroMesh visible → animation resumed");
+                    } else {
+                        // heroMesh is not visible → pause animation
+                        stopAnimation();
+                        console.log("heroMesh hidden → animation paused");
+                    }
+                });
+            }, { threshold: 0.1 }); // trigger when at least 10% visible
+
+            observer.observe(heroMesh);
+            
+        </script>
     </div>
 </body>
 </html>
