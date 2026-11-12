@@ -5,8 +5,30 @@
     <title>Devlog</title>
     <link rel="stylesheet" type="text/css" href="website.css">
     <script src="script.js"></script>
+    <script type="module">
+        import { startAnimation, renderFrame } from "./contour/contour_animation.js"
+        import { setup } from "./contour/perlin_gen.js"
+
+        let res = 3;
+        let colors = 20;
+        const field = setup(res, "meshContainer1");
+        const colorlist = [[255,255,255],[255,0,0], [255,166,0],[255,255,0],[0,255,0],[0,0,255],[75,0,130],[0,0,0]]; // white, yellow, magenta, cyan, black, 
+        // colorlist = [[255,255,255], [255,255,0],[255,173,0], [255,0,255],[68,214,44], [0,255,255],[77, 77, 255],[0,0,0]]; // white, orange, yellow, magenta, green, cyan, blue, black, 
+        // colorlist = [[0,0,0],[255,255,0],[255,255,255]]
+        // colorlist = [[125, 125, 125]] // single colors
+        // colorlist = [[0,0,0], [255,255,255]]
+        
+        let dampening = 0.05;
+        let scale = 0.35;
+        renderFrame(field, colors, colorlist, dampening, scale);
+        // startAnimation(field, colors, colorlist, 0.1, dampening, scale);
+        // Single still frame: (field, colors, colorlist, dampening, scale)
+        // renderFrame(field, colors, colorlist, dampening, scale);
+
+
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-    <script src="contour.js"></script>
+
     <style>
         #wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
         svg { width: 100%; height: 520px; display: block; border-radius: 16px; }
@@ -24,7 +46,7 @@
     </nav>
     <div class="heroPage" id="meshContainer1">
         <div class="overlay">
-            <h1>A Penguin's Website</h1>
+            <h1>A 276 Project</h1>
         </div>
         <svg id="heroMesh" alt="A contour map created using marching square algorithm and perlin noise generation"></svg>
     </div>
@@ -89,35 +111,6 @@
                 <td colspan="2">© 2025 Ringo Kojima</td>
             </tr>
         </table>
-            <script>
-
-            let res = 10;
-            let colors = 10;
-            const field = setup(res, "meshContainer1");
-            colorlist = [[255,255,255],[255,0,0], [255,166,0],[255,255,0],[0,255,0],[0,0,255],[75,0,130],[0,0,0]]; // white, yellow, magenta, cyan, black, 
-            //colorlist = [[255,255,255], [255,255,0],[255,173,0], [255,0,255],[68,214,44], [0,255,255],[77, 77, 255],[0,0,0]]; // white, orange, yellow, magenta, green, cyan, blue, black, 
-
-
-            startAnimation(field, colors, colorlist, 0.1, 0.25, 0.25);
-
-            const heroMesh = document.getElementById("heroMesh");
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // heroMesh is visible → resume animation
-                        resumeAnimation();
-                        console.log("heroMesh visible → animation resumed");
-                    } else {
-                        // heroMesh is not visible → pause animation
-                        stopAnimation();
-                        console.log("heroMesh hidden → animation paused");
-                    }
-                });
-            }, { threshold: 0.1 }); // trigger when at least 10% visible
-
-            observer.observe(heroMesh);
-            
-        </script>
     </div>
 </body>
 </html>
